@@ -1,0 +1,45 @@
+.input-note {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  //   flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  left: 50%;
+  //   padding: 3rem;
+  //   background-color: beige;
+  //   border: 1px solid #ffffff;
+  //   border-radius: 10px;
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  &-container {
+    margin: auto;
+    background-color: beige;
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  &.active {
+    display: flex;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+
+    &__title,
+    &__text-area,
+    &__button {
+      margin: 1rem 0;
+    }
+  }
+}

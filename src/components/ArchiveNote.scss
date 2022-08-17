@@ -1,0 +1,46 @@
+.archive-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .archive-item {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+    max-width: 400px;
+    border-radius: 10px;
+    flex-direction: column;
+
+    &__title,
+    &__date,
+    &__body,
+    &__action {
+      padding: 0.5rem;
+    }
+
+    &__title {
+    }
+
+    &__date {
+    }
+
+    &__body {
+      height: 100%;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    &__action {
+      border-top: solid 1px #ffffff;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+
+      &-archive,
+      &-delete {
+        padding: 0.3rem;
+      }
+    }
+  }
+}
