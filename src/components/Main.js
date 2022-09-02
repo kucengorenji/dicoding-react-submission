@@ -3,41 +3,30 @@ import { useState } from 'react';
 import InputNote from './InputNote';
 import DisplayNote from './DisplayNote';
 import ArchiveNote from './ArchiveNote';
-import { getInitialData, showFormattedDate } from '../data';
+import { getInitialData } from '../data';
 import SearchBar from './SearchBar';
 
 const Main = () => {
   const initialData = getInitialData();
-  const formatDate = showFormattedDate();
+
   const [data, setData] = useState(initialData);
   const [searchFilter, setSearchFilter] = useState('');
-  const [note, setNote] = useState(data);
-  console.log(formatDate);
   const [isInputFormActive, setIsInputFormActive] = useState(false);
 
   const onInsertNote = (item) => {
-    setData((item) => {
-      return {
-        data: [...data, item],
-      };
-    });
-  };
-  const onArchiveNote = (item) => {
-    if (item.archived) {
-      item.archived = false;
-    } else {
-      item.archived = true;
-    }
-
     setData([...data, item]);
   };
-
-  const onDeleteArchiveNote = (item) => {};
-
-  const onDeleteNote = (item) => {
-    const deleteItem = item.filter((item) => item.id !== item.id);
-    this.setState({ initialData: deleteItem });
+  const onArchiveNote = (id) => {
+    const archiveItem = (data.filter((item) => item.id === id)[0].archived =
+      !data.filter((item) => item.id === id)[0].archived);
+    setData([...data, archiveItem]);
   };
+
+  const onDeleteNote = (id) => {
+    const deleteItem = data.filter((item) => item.id !== id);
+    setData(deleteItem);
+  };
+
   const onSearchNote = (event) => {
     const query = event.target.value.toLowerCase();
     setSearchFilter(query);
@@ -69,7 +58,6 @@ const Main = () => {
         onCloseInputNote={onCloseInputNote}
         isActive={isInputFormActive}
         onInsertNote={onInsertNote}
-        inputDate={formatDate}
       />
       <DisplayNote
         data={filterDataQuery}
@@ -78,7 +66,7 @@ const Main = () => {
       />
       <ArchiveNote
         data={filterDataQuery}
-        onDeleteArchiveNote={onDeleteArchiveNote}
+        onArchiveNote={onArchiveNote}
         onDeleteNote={onDeleteNote}
       />
     </div>

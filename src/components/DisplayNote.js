@@ -1,13 +1,12 @@
 import './DisplayNote.scss';
 
-const DisplayNote = ({ data }) => {
-  const handleArchive = (id) => {};
-  const handleDelete = (id) => {};
+const DisplayNote = ({ data, onDeleteNote, onArchiveNote }) => {
+  const activeNotes = data.filter((note) => note.archived === false);
 
   return (
     <>
       <div className="note-container">
-        {data.map(({ id, title, createdAt, body }) => {
+        {activeNotes.map(({ id, title, createdAt, body }) => {
           return (
             <div className="note-item" key={id}>
               <div className="note-item__title">{title}</div>
@@ -16,7 +15,7 @@ const DisplayNote = ({ data }) => {
               <div className="note-item__action">
                 <button
                   onClick={() => {
-                    handleDelete(id);
+                    onDeleteNote(id);
                   }}
                   className="note-item__action-delete"
                 >
@@ -24,7 +23,7 @@ const DisplayNote = ({ data }) => {
                 </button>
                 <button
                   onClick={() => {
-                    handleArchive(id);
+                    onArchiveNote(id);
                   }}
                   className="note-item__action-archive"
                 >

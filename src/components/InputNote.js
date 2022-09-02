@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { showFormattedDate } from '../data';
 import './InputNote.scss';
 
 const InputNote = ({
@@ -8,16 +9,43 @@ const InputNote = ({
   onInsertNote,
   inputDate,
 }) => {
+  const addDate = +new Date();
+  const date = showFormattedDate(addDate);
+
   const [data, setData] = useState({
-    id: 5,
     title: '',
     body: '',
-    createdAt: inputDate,
     archived: false,
+    createdAt: date,
   });
 
-  const handleSubmit = () => {
+  const handleTitle = (e) => {
+    e.preventDefault();
+    setData({
+      ...data,
+      title: e.target.value,
+    });
+  };
+
+  const handleBody = (e) => {
+    e.preventDefault();
+    setData({
+      ...data,
+      body: e.target.value,
+    });
+  };
+
+  console.log(data);
+  const handleSubmit = (e) => {
+    console.log(data);
+    e.preventDefault();
     onInsertNote(data);
+    onCloseInputNote();
+    setData({
+      title: '',
+      body: '',
+      archived: false,
+    });
   };
 
   return (
@@ -25,20 +53,27 @@ const InputNote = ({
       <div className="input-note-container">
         <div className="input-note-header">
           <h1>Buat Catatan</h1>
-          <button onClick={onCloseInputNote}>close input form</button>
+          <button className="close-button" onClick={onCloseInputNote}>
+            close input form
+          </button>
         </div>
-        <form type="submit" className="input-note-form">
+        <form type="submit" onSubmit={handleSubmit} className="input-note-form">
           <input
             className="input-note-form__title"
             type="text"
             placeholder="insert note title"
+            onChange={handleTitle}
+            value={data.title}
+            required
           />
-          <input
+          <textarea
             className="input-note-form__text-area"
-            type="text-area"
             placeholder="insert your note here..."
+            onChange={handleBody}
+            value={data.body}
+            required
           />
-          <button onSubmit={handleSubmit} className="input-note-form__button">
+          <button onClick={handleSubmit} className="input-note-form__button">
             insert note
           </button>
         </form>

@@ -1,13 +1,13 @@
 import './ArchiveNote.scss';
 
-const ArchiveNote = ({ data }) => {
-  const handleDeleteArchive = (id) => {};
-  const handleDeleteNote = (id) => {};
+const ArchiveNote = ({ data, onDeleteNote }) => {
+  const activeNotes = data.filter((note) => note.archived === true);
 
   return (
     <>
+      <h1 className="archive-title">ArchiveNote</h1>
       <div className="archive-container">
-        {data.map(({ id, title, createdAt, body }) => {
+        {activeNotes.map(({ id, title, createdAt, body }) => {
           return (
             <div className="archive-item" key={id}>
               <div className="archive-item__title">{title}</div>
@@ -16,7 +16,7 @@ const ArchiveNote = ({ data }) => {
               <div className="archive-item__action">
                 <button
                   onClick={() => {
-                    handleDeleteNote(id);
+                    onDeleteNote(id);
                   }}
                   className="archive-item__action-delete"
                 >
@@ -24,7 +24,7 @@ const ArchiveNote = ({ data }) => {
                 </button>
                 <button
                   onClick={() => {
-                    handleDeleteArchive(id);
+                    onDeleteNote(id);
                   }}
                   className="archive-item__action-archive"
                 >
