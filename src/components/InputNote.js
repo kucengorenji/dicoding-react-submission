@@ -1,22 +1,13 @@
 import { useState } from 'react';
-import { showFormattedDate } from '../data';
 import './InputNote.scss';
 
-const InputNote = ({
-  onSearch,
-  isActive,
-  onCloseInputNote,
-  onInsertNote,
-  inputDate,
-}) => {
-  const addDate = +new Date();
-  const date = showFormattedDate(addDate);
-
+const InputNote = ({ isActive, onCloseInputNote, onInsertNote }) => {
   const [data, setData] = useState({
+    id: new Date().toISOString(),
     title: '',
     body: '',
     archived: false,
-    createdAt: date,
+    createdAt: new Date().toISOString(),
   });
 
   const handleTitle = (e) => {

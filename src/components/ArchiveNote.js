@@ -1,6 +1,6 @@
 import './ArchiveNote.scss';
 
-const ArchiveNote = ({ data, onDeleteNote }) => {
+const ArchiveNote = ({ data, onDeleteNote, onArchiveNote }) => {
   const activeNotes = data.filter((note) => note.archived === true);
 
   return (
@@ -24,7 +24,7 @@ const ArchiveNote = ({ data, onDeleteNote }) => {
                 </button>
                 <button
                   onClick={() => {
-                    onDeleteNote(id);
+                    onArchiveNote(id);
                   }}
                   className="archive-item__action-archive"
                 >
