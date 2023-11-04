@@ -20,7 +20,6 @@ const Main = () => {
     const archiveItem = (data.filter((item) => item.id === id)[0].archived =
       !data.filter((item) => item.id === id)[0].archived);
     setData([...data]);
-    console.log(data)
   };
 
   const onDeleteNote = (id) => {
