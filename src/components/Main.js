@@ -19,7 +19,8 @@ const Main = () => {
   const onArchiveNote = (id) => {
     const archiveItem = (data.filter((item) => item.id === id)[0].archived =
       !data.filter((item) => item.id === id)[0].archived);
-    setData([...data, archiveItem]);
+    setData([...data]);
+    console.log(data)
   };
 
   const onDeleteNote = (id) => {
@@ -33,13 +34,14 @@ const Main = () => {
   };
 
   const filterDataQuery = data.filter((item) => {
-    if (searchFilter !== '') {
+    if (searchFilter) {
       return item.title.toLowerCase().includes(searchFilter);
     } else {
       return item;
     }
   });
-
+  
+  
   const onClickInputNote = () => {
     setIsInputFormActive(true);
   };

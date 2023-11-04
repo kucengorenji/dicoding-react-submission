@@ -26,9 +26,7 @@ const InputNote = ({ isActive, onCloseInputNote, onInsertNote }) => {
     });
   };
 
-  console.log(data);
   const handleSubmit = (e) => {
-    console.log(data);
     e.preventDefault();
     onInsertNote(data);
     onCloseInputNote();
